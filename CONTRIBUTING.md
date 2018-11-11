@@ -4,7 +4,7 @@
 
 1. 查看issue, 避免和他人重复
 2. 创建相关翻译的issue, 详见[如何创建issue](#如何创建issue)
-3. fork仓库到自己的仓库
+3. 团队成员创建新分支, 非团队成员请fork仓库到自己的仓库
 4. 翻译文档路径必须和源文档目录相同, **名字中带空格的使用`-`代替**, 
 例如: 源文档为Language Structure/Literal Values, 
 则翻译文档的路径位Language-Structure/Literal-Values.md
@@ -18,7 +18,7 @@
 
 1. 挑选
 2. 标题需要使用**源文档的标题**
-3. 在issue内容中列出**翻译文档的URL**
+3. 在issue内容中列出**源文档的URL**
 4. issue会被定期查看, 如果查过**1个月**未有任何Pull Request, 则将会被关闭.
 所以请尽量选择合适的文档体量
 
