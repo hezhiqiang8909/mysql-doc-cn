@@ -1,4 +1,7 @@
-# mysql-8-doc-cn
+# MySQL 8 中文文档
+
+[MySQL 8中文文档 Gitbook](https://s2u2m.gitbook.io/mysql-8-doc-cn)
+
 translate [mysql 8.0](https://dev.mysql.com/doc/refman/8.0/en/) to Chinese
 
 ## 目录
