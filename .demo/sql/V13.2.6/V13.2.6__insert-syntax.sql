@@ -39,6 +39,16 @@ values
 ON DUPLICATE KEY 
 update `age` = 20;
 
+-- 重复时, 使用查询表的值
+insert into insert_syntax_tb1
+(`user_name`, `sex`, `age`, `born_time`, `dead_time`)
+select 'test1', `sex`, `age`, `born_time`, `dead_time`
+from insert_syntax_tb1 as tb2
+where id=2
+ON DUPLICATE KEY 
+update `age` = insert_syntax_tb1.age + tb2.age;
+
+
 -- `sex`使用默认值
 insert into insert_syntax_tb1
 (`user_name`, `age`, `born_time`, `dead_time`)

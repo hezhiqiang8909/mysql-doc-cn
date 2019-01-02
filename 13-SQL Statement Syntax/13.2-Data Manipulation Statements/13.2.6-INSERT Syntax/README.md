@@ -57,11 +57,11 @@ assignment_list:
 
 当插入行数据到分表中时, 可以指定哪些分表可以用来添加新增的行数据, 这些分表使用**,**隔开.
 当行数据无法添加到这些指定的分表时, 会提示错误**Found a row not matching the given partition set**.
-分表相关内容详见[Partition Selection](https://dev.mysql.com/doc/refman/8.0/en/partitioning-selection.html)
+分表相关内容详见[Partition Selection][]
 
 当插入的行数据可以**重写**老的行数据时, 可以使用`REPLACE`来代替`INSERT`.
 `REPLACE`和`INSERT IGNORE`相反的, 当老的行数据和新的行数据的`UNIQUE KEY`相同时, 新的行数据会覆盖老的行数据, 而不是放弃插入.
-详见[REPLACE Syntax](https://dev.mysql.com/doc/refman/8.0/en/replace.html)
+详见[REPLACE Syntax][]
 
 **tbl_name**指明行数据将被插入到哪个表中.
 
@@ -72,8 +72,7 @@ assignment_list:
 列值的来源可以有以下几种方式:
 
 - 如果**strict SQL mode**没有开启, 任何没有显示声明的列会使用默认值作为列值.
-默认值详见[Data Type Default Values](https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html)
-和[Constraints on Invalid Data](https://dev.mysql.com/doc/refman/8.0/en/constraint-invalid-data.html)
+默认值详见[Data Type Default Values][]和[Constraints on Invalid Data][]
 - 如果列名和列值都没有提供, 则INSERT操作会为每一列插入它的默认值(在表定义时必须提供默认值, 否则会报错):
 `INSERT INTO tbl_name () VALUES();`.
 如果`strict mode`没有开启, MySQL会将隐式默认值赋予没有显式声明的列; 否则提示`没有默认值`的错误.
@@ -108,15 +107,14 @@ INT和YEAR的column的值都是1999,
 在`INSERT`语句的上下文中, `VALUE`和`VALUES`是同义词, 没有任何区别.
 
 被`INSERT`接受的行可以通过SQL function`ROW_COUNT()`或者C API function`mysql_affected_rows()`来获取.
-详见[Information Functions](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html)
-和[mysql_affected_rows()](https://dev.mysql.com/doc/refman/8.0/en/mysql-affected-rows.html)
+详见[Information Functions][]和[mysql_affected_rows()][]
 
 ### 多行插入的的响应信息
 
 如果使用`INSERT ... VALUES`或者`INSERT ... SELECT`来插入多行, 会返回以下的信息.
 `Records: N1 Duplicates: N2 Warnings: N3`
 
-也可以通过使用C API `mysql_info()`来获取这些信息. 详见[mysql_info()](https://dev.mysql.com/doc/refman/8.0/en/mysql-info.html)
+也可以通过使用C API `mysql_info()`来获取这些信息. 详见[mysql_info()][]
 
 - `Records`, 有多少行被该语句处理(它不是真正被插入到表中的数量, 因为`Duplicates`有可能非零)
 - `Duplicates`, 有多少行由于存在unique index的值重复, 导致没有被插入
@@ -133,13 +131,13 @@ INT和YEAR的column的值都是1999,
 - 将一个超长的字符串插入到字符串类型(CHAR, VARCHAR, TEXT, BLOB)的列, 
 它的值会被缩短, 只保留最大长度的部分.
 - 如果将一个非法的值插入到时间类型(date, time)的列, 则会使用0来填充列值.
-- 插入语句如果涉及到`AUTO_INCREMENT`列的值, 请参考[Using AUTO_INCREMENT](https://dev.mysql.com/doc/refman/8.0/en/example-auto-increment.html)
+- 插入语句如果涉及到`AUTO_INCREMENT`列的值, 请参考[Using AUTO_INCREMENT][]
 如果插入一行到一个有`AUTO_INCREMENT`列的表, 可以通过SQL function `LAST_INSERT_ID()`或者C API `mysql_insert_id()`来获取对应的值.
 
 **注意**: LAST_INSERT_ID和mysql_insert_id返回的值不一定总是相等.
 有关`INSERT`中涉及`AUTO_INCREMENT`会在后面再深入学习, 
-详见[12.15 Information Functions](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html)
-和[28.7.7.38 mysql_insert_id()](https://dev.mysql.com/doc/refman/8.0/en/mysql-insert-id.html)
+详见[12.15 Information Functions][]
+和[28.7.7.38 mysql_insert_id()][]
 
 ## INSERT的修饰符
 
@@ -203,7 +201,17 @@ affected-rows的值为1(而不是0), 如果和已有行重复并不修改已有�
 
 ---
 
+[Partition Selection]: https://dev.mysql.com/doc/refman/8.0/en/partitioning-selection.html
+[REPLACE Syntax]: https://dev.mysql.com/doc/refman/8.0/en/replace.html
+[Data Type Default Values]: https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html
 [CREATE TABLE and Generated Columns]: https://dev.mysql.com/doc/refman/8.0/en/create-table-generated-columns.html
+[Constraints on Invalid Data]: https://dev.mysql.com/doc/refman/8.0/en/constraint-invalid-data.html
+[Information Functions]: https://dev.mysql.com/doc/refman/8.0/en/information-functions.html
+[mysql_affected_rows()]: https://dev.mysql.com/doc/refman/8.0/en/mysql-affected-rows.html
+[mysql_info()]: https://dev.mysql.com/doc/refman/8.0/en/mysql-info.html
+[Using AUTO_INCREMENT]: https://dev.mysql.com/doc/refman/8.0/en/example-auto-increment.html
+[12.15 Information Functions]: https://dev.mysql.com/doc/refman/8.0/en/information-functions.html
+[28.7.7.38 mysql_insert_id()]: https://dev.mysql.com/doc/refman/8.0/en/mysql-insert-id.html
 [8.11.3 Concurrent Inserts]: https://dev.mysql.com/doc/refman/8.0/en/concurrent-inserts.html
 [23.2.2 LIST Partitioning]: https://dev.mysql.com/doc/refman/8.0/en/partitioning-list.html
 [Comparison of the IGNORE Keyword and Strict SQL Mode]: https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#ignore-strict-comparison
